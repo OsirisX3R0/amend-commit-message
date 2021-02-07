@@ -4,6 +4,10 @@
 	"publisher": "OsirisX3R0",
 	"description": "Extension for easily amending your previous commit message",
 	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/OsirisX3R0/ammendcommitmessage.git"
+	},
 	"engines": {
 		"vscode": "^1.53.0"
 	},
