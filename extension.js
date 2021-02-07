@@ -18,10 +18,23 @@ function activate(context) {
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('amendcommitmessage.amendCommitMessage', function () {
+		const gitExtension = vscode.extensions.getExtension('vscode.git').exports
+		const api = gitExtension.getAPI(1)
+		const repo = api.repositories[0]
+		console.log(api.repositories)
+		const head = repo ? repo.state.HEAD : {commit: {message: ''}}
+		const {commit} = head
+		const oldMsg = commit.message
+
+		vscode.window.showInputBox({prompt: 'Enter your new commit message', placeHolder: oldMsg || 'Enter your message here'})
+			.then(newMsg => {
+				repo.commit(newMsg, {amend: true})
+				vscode.window.showInformationMessage(`Commit message updated: ${oldMsg} >>> ${newMsg}`);
+			})
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from AmendCommitMessage!');
+		
 	});
 
 	context.subscriptions.push(disposable);
