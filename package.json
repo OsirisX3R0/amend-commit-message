@@ -12,7 +12,7 @@
 		"vscode": "^1.53.0"
 	},
 	"categories": [
-		"Git"
+		"Other"
 	],
 	"activationEvents": [
 		"onCommand:amendcommitmessage.amendCommitMessage"
