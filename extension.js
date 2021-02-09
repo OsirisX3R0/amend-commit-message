@@ -21,17 +21,18 @@ function activate(context) {
 		const gitExtension = vscode.extensions.getExtension('vscode.git').exports
 		const api = gitExtension.getAPI(1)
 		const repo = api.repositories[0]
-		console.log(api.repositories)
-		const head = repo ? repo.state.HEAD : {name: '', commit: ''}
-		const {name, upstream} = head
-		const oldMsg = upstream.name
+		// May come back to this if I can find the old commit message
+		// const head = repo ? repo.state.HEAD : {name: '', commit: ''}
+		// const {name, upstream} = head
+		// const oldMsg = upstream.name
 
-		vscode.window.showInputBox({prompt: 'Enter your new commit message', placeHolder: oldMsg || 'Enter your message here'})
+		vscode.window.showInputBox({prompt: 'Enter your new commit message', placeHolder: ''})
 			.then(newMsg => {
+				// Only commit if the message changed, to avoid unnecessary updates
 				if (newMsg) {
 					repo.commit(newMsg, {amend: true})
 						.then(() => {
-							vscode.window.showInformationMessage(`Commit message updated: ${oldMsg} >>> ${newMsg}`);
+							vscode.window.showInformationMessage(`New commit message >>> ${newMsg}`);
 						})
 						.catch(err => {
 							vscode.window.showInformationMessage(err)
