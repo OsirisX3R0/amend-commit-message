@@ -23,15 +23,15 @@ function activate(context) {
 		const repo = api.repositories[0]
 		console.log(api.repositories)
 		const head = repo ? repo.state.HEAD : {name: '', commit: ''}
-		const {commit, name} = head
-		const oldMsg = name
+		const {name, upstream} = head
+		const oldMsg = upstream.name
 
 		vscode.window.showInputBox({prompt: 'Enter your new commit message', placeHolder: oldMsg || 'Enter your message here'})
 			.then(newMsg => {
 				if (newMsg) {
 					repo.commit(newMsg, {amend: true})
 						.then(() => {
-							vscode.window.showInformationMessage(`Commit ${commit} message updated: ${oldMsg} >>> ${newMsg}`);
+							vscode.window.showInformationMessage(`Commit message updated: ${oldMsg} >>> ${newMsg}`);
 						})
 						.catch(err => {
 							vscode.window.showInformationMessage(err)
