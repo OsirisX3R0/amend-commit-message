@@ -3,7 +3,7 @@
 	"displayName": "Amend Commit Message",
 	"publisher": "OsirisX3R0",
 	"description": "Extension for easily amending your previous commit message",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/OsirisX3R0/amend-commit-message.git"
