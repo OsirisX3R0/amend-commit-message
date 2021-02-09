@@ -1,15 +1,15 @@
 {
-	"name": "amendcommitmessage",
-	"displayName": "AmendCommitMessage",
+	"name": "amend-commit-message",
+	"displayName": "Amend Commit Message",
 	"publisher": "OsirisX3R0",
 	"description": "Extension for easily amending your previous commit message",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/OsirisX3R0/ammendcommitmessage.git"
+		"url": "https://github.com/OsirisX3R0/amend-commit-message.git"
 	},
 	"engines": {
-		"vscode": "^1.53.0"
+		"vscode": "^1.48.0"
 	},
 	"categories": [
 		"Other"
@@ -34,7 +34,7 @@
 		"publish": "vsce publish"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.53.0",
+		"@types/vscode": "^1.48.0",
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.4",
 		"@types/node": "^12.11.7",
