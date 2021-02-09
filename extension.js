@@ -12,7 +12,7 @@ function activate(context) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "amendcommitmessage" is now active!');
+	console.log('Congratulations, your extension "amend-commit-message" is now active!');
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
@@ -22,14 +22,19 @@ function activate(context) {
 		const api = gitExtension.getAPI(1)
 		const repo = api.repositories[0]
 		console.log(api.repositories)
-		const head = repo ? repo.state.HEAD : {commit: {message: ''}}
-		const {commit} = head
-		const oldMsg = commit.message
+		const head = repo ? repo.state.HEAD : {name: '', commit: ''}
+		const {commit, name} = head
+		const oldMsg = name
 
 		vscode.window.showInputBox({prompt: 'Enter your new commit message', placeHolder: oldMsg || 'Enter your message here'})
 			.then(newMsg => {
 				repo.commit(newMsg, {amend: true})
-				vscode.window.showInformationMessage(`Commit message updated: ${oldMsg} >>> ${newMsg}`);
+					.then(() => {
+						vscode.window.showInformationMessage(`Commit ${commit} message updated: ${oldMsg} >>> ${newMsg}`);
+					})
+					.catch(err => {
+						vscode.window.showInformationMessage(err)
+					})
 			})
 		// The code you place here will be executed every time your command is executed
 
