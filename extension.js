@@ -28,13 +28,15 @@ function activate(context) {
 
 		vscode.window.showInputBox({prompt: 'Enter your new commit message', placeHolder: oldMsg || 'Enter your message here'})
 			.then(newMsg => {
-				repo.commit(newMsg, {amend: true})
-					.then(() => {
-						vscode.window.showInformationMessage(`Commit ${commit} message updated: ${oldMsg} >>> ${newMsg}`);
-					})
-					.catch(err => {
-						vscode.window.showInformationMessage(err)
-					})
+				if (newMsg) {
+					repo.commit(newMsg, {amend: true})
+						.then(() => {
+							vscode.window.showInformationMessage(`Commit ${commit} message updated: ${oldMsg} >>> ${newMsg}`);
+						})
+						.catch(err => {
+							vscode.window.showInformationMessage(err)
+						})
+				}
 			})
 		// The code you place here will be executed every time your command is executed
 
